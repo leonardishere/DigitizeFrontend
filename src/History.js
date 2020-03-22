@@ -6,7 +6,6 @@ import CardBody from './components/Card/CardBody.jsx';
 import Table from './components/Table/Table.jsx';
 
 function ActiveCheckinTable(props){
-  console.log('active props:', props);
   return (
     <Card className="col-12">
       <CardHeader color="danger">
@@ -35,7 +34,6 @@ function ActiveCheckinTable(props){
 }
 
 function InactiveCheckinTable(props){
-  console.log('inactive props:', props);
   return (
     <Card className="col-12">
       <CardHeader color="danger">
@@ -46,10 +44,14 @@ function InactiveCheckinTable(props){
           props.checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No inactive checkins</p> :
           <Table
             tableHeaderColor="primary"
-            tableHead={['Name', 'Cardreader', 'Time In', 'Time Out']}
+            tableHead={['Name', 'Time In', 'Time Out']}
             tableData={
               props.checkins.map(checkin=>{
-                return [checkin[1], checkin[0].toString()];
+                return [
+                  checkin.Student.Name,
+                  new Date(checkin.CheckinTime).toLocaleTimeString(),
+                  new Date(checkin.CheckoutTime).toLocaleTimeString()
+                ];
               })
             }
           />
