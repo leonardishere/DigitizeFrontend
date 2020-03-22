@@ -32,10 +32,11 @@ class App extends React.Component {
       checkins: [],
       students: []
     };
+    this.loadData = this.loadData.bind(this);
     this.clickDashboard = this.clickDashboard.bind(this);
     this.clickHistory = this.clickHistory.bind(this);
     this.clickStudents = this.clickStudents.bind(this);
-    this.loadData = this.loadData.bind(this);
+    this.dismissClass = this.dismissClass.bind(this);
     this.loadData();
   }
 
@@ -43,7 +44,6 @@ class App extends React.Component {
     var get_checkins_url = "https://digitize-api1.aleonard.dev/checkins/active/";
     axios.get(get_checkins_url)
     .then(res => {
-      console.log('received checkins:', res.data);
       this.setState({
         selected: 'dashboard',
         checkins: res.data
@@ -54,7 +54,6 @@ class App extends React.Component {
     var get_students_url = "https://digitize-api1.aleonard.dev/students/";
     axios.get(get_students_url)
     .then(res => {
-      console.log('received students:', res.data);
       this.setState({
         students: res.data
       });
@@ -74,6 +73,20 @@ class App extends React.Component {
     this.setState({selected: 'students'});
   }
 
+  dismissClass(){
+    var dismiss_class_url = "https://digitize-api1.aleonard.dev/checkout/";
+    axios.post(dismiss_class_url)
+    .then(res => {
+      for(var i = 0; i < res.data.length; ++i){
+        console.log(res.data[i].msgType + ': ' + res.data[i].msg);
+      }
+      console.log(this.state);
+      this.setState({ checkins: [] });
+      console.log(this.state);
+    })
+    .catch(err => console.error(err));
+  }
+
   render() {
     var element = null;
     if(this.state.selected === 'loading') element = <Loading/>;
@@ -88,6 +101,7 @@ class App extends React.Component {
             clickDashboard={this.clickDashboard}
             clickHistory={this.clickHistory}
             clickStudents={this.clickStudents}
+            dismissClass={this.dismissClass}
           />
           <div className="main-panel">
             <MyNav/>

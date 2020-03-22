@@ -19,6 +19,7 @@ class MyNav extends React.Component {
           </button>
 
           <div className="navbar-wrapper">
+            {/*eslint-disable-next-line*/}
             <a className="navbar-brand">Dashboard</a>
           </div>
 
