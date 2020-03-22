@@ -73,7 +73,7 @@ Resources:
             - OPTIONS
           Compress: true
           ViewerProtocolPolicy: redirect-to-https
-          TargetOriginID: S3WebsiteBucket
+          TargetOriginId: S3WebsiteBucket
           ForwardedValues:
             QueryString: false
         PriceClass: PriceClass_100
@@ -89,7 +89,7 @@ Resources:
         - Key: Purpose
           Value: DigitizeFrontendCloudFrontDistribution
     DependsOn: S3WebsiteBucketPolicy
-  DnsZone:
+  DnsZoneIPv4:
     Type: AWS::Route53::RecordSet
     Properties:
       AliasTarget:
@@ -101,4 +101,19 @@ Resources:
         HostedZoneId: Z2FDTNDATAQYW2
       HostedZoneName: aleonard.dev
       Name: digitize.aleonard.dev
+      Type: A
+    DependsOn: WebsiteDistribution
+  DnsZoneIPv6:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::GetAtt:
+            - WebsiteDistribution
+            - DomainName
+        EvaluateTargetHealth: false
+        HostedZoneId: Z2FDTNDATAQYW2
+      HostedZoneName: aleonard.dev
+      Name: digitize.aleonard.dev
+      Type: AAAA
     DependsOn: WebsiteDistribution
