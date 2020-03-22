@@ -55,7 +55,7 @@ Resources:
       DistributionConfig:
         Origins:
           - Id: S3WebsiteBucket
-            DomainName: digitize.aleonard.dev.s3-website-us-west-2.amazonaws.com
+            DomainName: digitize.aleonard.dev
             S3OriginConfig:
               OriginAccessIdentity: origin-access-identity/cloudfront/E2E9MMJ8F9AJOK
         Enabled: 'true'
