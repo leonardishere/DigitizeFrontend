@@ -76,6 +76,7 @@ Resources:
           TargetOriginId: S3WebsiteBucket
           ForwardedValues:
             QueryString: false
+          MaxTTL: 60 # TODO: remove this after development is done
         PriceClass: PriceClass_100
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:917159232232:certificate/408296a8-d7c1-494a-b9ff-abe529616322
@@ -89,3 +90,31 @@ Resources:
         - Key: Purpose
           Value: DigitizeFrontendCloudFrontDistribution
     DependsOn: S3WebsiteBucketPolicy
+  DnsZoneIPv4:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::GetAtt:
+            - WebsiteDistribution
+            - DomainName
+        EvaluateTargetHealth: false
+        HostedZoneId: Z2FDTNDATAQYW2
+      HostedZoneName: aleonard.dev
+      Name: digitize.aleonard.dev
+      Type: A
+    DependsOn: WebsiteDistribution
+  DnsZoneIPv6:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::GetAtt:
+            - WebsiteDistribution
+            - DomainName
+        EvaluateTargetHealth: false
+        HostedZoneId: Z2FDTNDATAQYW2
+      HostedZoneName: aleonard.dev
+      Name: digitize.aleonard.dev
+      Type: AAAA
+    DependsOn: WebsiteDistribution
