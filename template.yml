@@ -49,4 +49,43 @@ Resources:
             Principal:
                AWS: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2E9MMJ8F9AJOK"
     DependsOn: S3WebsiteBucket
-  
+  WebsiteDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - Id: S3WebsiteBucket
+            DomainName: digitize.aleonard.dev.s3-website-us-west-2.amazonaws.com
+            S3OriginConfig:
+              OriginAccessIdentity: origin-access-identity/cloudfront/E2E9MMJ8F9AJOK
+        Enabled: 'true'
+        DefaultRootObject: index.html
+        Aliases:
+          - digitize.aleonard.dev
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          Compress: true
+          ViewerProtocolPolicy: redirect-to-https
+          TargetOriginId: S3WebsiteBucket
+          ForwardedValues:
+            QueryString: false
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:917159232232:certificate/408296a8-d7c1-494a-b9ff-abe529616322
+          MinimumProtocolVersion: TLSv1.2_2018
+          SslSupportMethod: sni-only
+        HttpVersion: http2
+        IPV6Enabled: true
+      Tags:
+        - Key: Project
+          Value: Digitize
+        - Key: Purpose
+          Value: DigitizeFrontendCloudFrontDistribution
+    DependsOn: S3WebsiteBucketPolicy
