@@ -61,7 +61,7 @@ Resources:
         Enabled: 'true'
         DefaultRootObject: index.html
         Aliases:
-          - digitizetest.aleonard.dev
+          - digitize.aleonard.dev
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -72,7 +72,6 @@ Resources:
             - HEAD
             - OPTIONS
           Compress: true
-          TargeOriginID: S3WebsiteBucket
           ViewerProtocolPolicy: redirect-to-https
         PriceClass: PriceClass_100
         ViewerCertificate:
