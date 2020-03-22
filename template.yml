@@ -74,7 +74,6 @@ Resources:
           Compress: true
           TargeOriginID: S3WebsiteBucket
           ViewerProtocolPolicy: redirect-to-https
-        TargetOriginId: S3WebsiteBucket
         PriceClass: PriceClass_100
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:917159232232:certificate/408296a8-d7c1-494a-b9ff-abe529616322
