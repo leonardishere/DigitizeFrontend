@@ -27,7 +27,7 @@ Resources:
   S3WebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: digitizetest.aleonard.dev
+      BucketName: digitize.aleonard.dev
       WebsiteConfiguration:
         IndexDocument: index.html
       Tags:
@@ -45,7 +45,7 @@ Resources:
           - Action:
               - "s3:GetObject"
             Effect: "Allow"
-            Resource: arn:aws:s3:::digitizetest.aleonard.dev/*
+            Resource: arn:aws:s3:::digitize.aleonard.dev/*
             Principal:
                AWS: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2E9MMJ8F9AJOK"
     DependsOn: S3WebsiteBucket
@@ -55,7 +55,7 @@ Resources:
       DistributionConfig:
         Origins:
           - Id: S3WebsiteBucket
-            DomainName: digitizetest.aleonard.dev.s3-website-us-west-2.amazonaws.com
+            DomainName: digitize.aleonard.dev.s3-website-us-west-2.amazonaws.com
             S3OriginConfig:
               OriginAccessIdentity: origin-access-identity/cloudfront/E2E9MMJ8F9AJOK
         Enabled: 'true'
