@@ -29,6 +29,8 @@ Resources:
     Properties:
       # AccessControl ?
       BucketName: digitizetest.aleonard.dev
+      WebsiteConfiguration:
+        IndexDocument: index.html
       Tags:
         - Key: Project
           Value: Digitize
@@ -39,6 +41,7 @@ Resources:
     Properties:
       Bucket: !Ref s3websitebucket
       PolicyDocument:
+        Version: "2012-10-17"
         Statement:
           -
             Action:
