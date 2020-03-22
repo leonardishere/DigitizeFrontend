@@ -20,10 +20,10 @@ class Dashboard extends React.Component {
       });
     }
     for(i = 0; i < this.props.checkins.length; ++i){
-      cardreader_statuses[this.props.checkins[i][0]] = {
-        cardreaderid: this.props.checkins[i][0],
+      cardreader_statuses[this.props.checkins[i].CardReaderID] = {
+        cardreaderid: this.props.checkins[i].CardReaderID,
         status: 'occupied',
-        name: this.props.checkins[i][1]
+        name: this.props.checkins[i].Student.Name
       };
     }
     this.state = { cardreader_statuses: cardreader_statuses };

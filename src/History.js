@@ -1,72 +1,61 @@
 import React from 'react';
 
+import Card from './components/Card/Card.jsx';
+import CardHeader from './components/Card/CardHeader.jsx';
+import CardBody from './components/Card/CardBody.jsx';
+import Table from './components/Table/Table.jsx';
+
 function ActiveCheckinTable(props){
+  console.log('active props:', props);
   return (
-    <div className="card card-nav-tabs col-lg-12 col-md-12 col-sm-12">
-      <div className="card-header card-header-danger">
+    <Card className="col-12">
+      <CardHeader color="danger">
         <p style={{marginBottom:'0px'}}>Active Checkins</p>
-      </div>
-      <div className="container">
+      </CardHeader>
+      <CardBody>
         {
-          props.checkins.length === 0 ? <h3>No active checkins</h3> :
-          <table>
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Card Reader</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                props.checkins.map((row,i)=>{
-                  return (
-                    <tr key={row[0]}>
-                      <td>{row[0]}</td>
-                      <td>{row[1]}</td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+          props.checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No active checkins</p> :
+          <Table
+            tableHeaderColor="primary"
+            tableHead={['Name', 'Cardreader', 'Time']}
+            tableData={
+              props.checkins.map(checkin=>{
+                return [
+                  checkin.Student.Name,
+                  checkin.CardReaderID.toString(),
+                  new Date(checkin.CheckinTime).toLocaleTimeString()
+                ];
+              })
+            }
+          />
         }
-      </div>
-    </div>
+      </CardBody>
+    </Card>
   )
 }
 
 function InactiveCheckinTable(props){
+  console.log('inactive props:', props);
   return (
-    <div className="card card-nav-tabs col-lg-12 col-md-12 col-sm-12">
-      <div className="card-header card-header-danger">
+    <Card className="col-12">
+      <CardHeader color="danger">
         <p style={{marginBottom:'0px'}}>Inactive Checkins</p>
-      </div>
-      <div className="container">
+      </CardHeader>
+      <CardBody>
         {
-          props.checkins.length === 0 ? <h3>No inactive checkins</h3> :
-          <table>
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Card Reader</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                props.checkins.map((row,i)=>{
-                  return (
-                    <tr key={row[0]}>
-                      <td>{row[0]}</td>
-                      <td>{row[1]}</td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+          props.checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No inactive checkins</p> :
+          <Table
+            tableHeaderColor="primary"
+            tableHead={['Name', 'Cardreader', 'Time In', 'Time Out']}
+            tableData={
+              props.checkins.map(checkin=>{
+                return [checkin[1], checkin[0].toString()];
+              })
+            }
+          />
         }
-      </div>
-    </div>
+      </CardBody>
+    </Card>
   )
 }
 

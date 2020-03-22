@@ -1,40 +1,32 @@
 import React from 'react';
 
+import Card from './components/Card/Card.jsx';
+import CardHeader from './components/Card/CardHeader.jsx';
+import CardBody from './components/Card/CardBody.jsx';
+import Table from './components/Table/Table.jsx';
+
 class Students extends React.Component {
   render(){
     return (
-      <div className="card card-nav-tabs col-lg-12 col-md-12 col-sm-12">
-        <div className="card-header card-header-danger">
+      <Card className="col-12">
+        <CardHeader color="danger">
           <p style={{marginBottom:'0px'}}>Students</p>
-        </div>
-        <div className="container">
+        </CardHeader>
+        <CardBody>
           {
-            this.props.students.length === 0 ? <h3>No students</h3> :
-            <table>
-              <thead>
-                <tr>
-                  <th>Student Name</th>
-                  <th>Student ID</th>
-                  <th>Card ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  this.props.students.map((student,i)=>{
-                    return (
-                      <tr key={student.StudentID}>
-                        <td>{student.Name}</td>
-                        <td>{student.StudentID}</td>
-                        <td>{student.CardID}</td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+            this.props.students.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No students</p> :
+            <Table
+              tableHeaderColor="primary"
+              tableHead={['Name', 'Student ID', 'Card ID']}
+              tableData={
+                this.props.students.map(student=>{
+                  return [student.Name, student.StudentID, student.CardID];
+                })
+              }
+            />
           }
-        </div>
-      </div>
+        </CardBody>
+      </Card>
     )
   }
 }

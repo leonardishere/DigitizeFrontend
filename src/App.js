@@ -54,7 +54,7 @@ class App extends React.Component {
     var get_students_url = "https://digitize-api1.aleonard.dev/students/";
     axios.get(get_students_url)
     .then(res => {
-      console.log('received students:', res.data)
+      console.log('received students:', res.data);
       this.setState({
         students: res.data
       });
