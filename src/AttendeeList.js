@@ -14,18 +14,16 @@ class AttendeeList extends React.Component {
         <CardBody>
           <ul id="attendee_list" className="list-group list-group-flush">
             {
-              this.props.cardreader_statuses
-              .filter(status => status.status !== 'unoccupied')
-              .map(status => {
+              this.props.checkins.map(checkin => {
                 return (
                   <li
-                    key={status.cardreaderid}
+                    key={checkin.CardReaderID}
                     className="list-group-item"
-                    onMouseEnter={e=>this.props.handleHover(status.cardreaderid,true)}
-                    onMouseLeave={e=>this.props.handleHover(status.cardreaderid,false)}
-                    style={status.status === 'selected' ? {backgroundColor:'lightgray'} : {}}
+                    onMouseEnter={e=>this.props.handleHover(checkin.CardReaderID,true)}
+                    onMouseLeave={e=>this.props.handleHover(checkin.CardReaderID,false)}
+                    style={this.props.selected === checkin.CardReaderID ? {backgroundColor:'lightgray'} : {}}
                   >
-                    {status.name}
+                    {checkin.Student.Name}
                   </li>
                 )
               })

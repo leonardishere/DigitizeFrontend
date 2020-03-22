@@ -9,6 +9,22 @@ class ClassroomMap extends React.Component {
   render(){
     var coords = [[135,255],[149,222],[171,194],[200,170],[232,154],[271,143],[87,214],[102,188],[121,165],[141,143],[166,124],[192,108],[221,96],[251,86],[281,82],[36,191],[55,154],[83,122],[109,95],[137,75],[167,53],[203,42],[239,29],[277,25],[34,88],[65,56],[339,139],[375,150],[410,165],[439,189],[463,216],[481,247],[336,81],[369,88],[400,97],[426,109],[452,125],[475,143],[496,166],[515,190],[529,216],[339,26],[379,33],[416,43],[451,58],[480,75],[509,99],[535,123],[560,155],[579,189],[545,55],[581,85]];
 
+    var cardreader_statuses = [];
+    for(var i = 0; i < 52; ++i){
+      cardreader_statuses.push({
+        cardreaderid: i,
+        status: 'unoccupied',
+        name: ''
+      });
+    }
+    for(i = 0; i < this.props.checkins.length; ++i){
+      cardreader_statuses[this.props.checkins[i].CardReaderID] = {
+        cardreaderid: this.props.checkins[i].CardReaderID,
+        status: this.props.selected === this.props.checkins[i].CardReaderID ? 'selected' : 'occupied',
+        name: this.props.checkins[i].Student.Name
+      };
+    }
+
     return (
       <Card className="col-lg-mod-9 col-md-12 col-sm-12">
         <CardHeader color="danger">
@@ -19,7 +35,7 @@ class ClassroomMap extends React.Component {
           <div className="overlay">
             <svg viewBox="0 0 612 320" id="svg">
               {
-                this.props.cardreader_statuses.map((status,i)=>{
+                cardreader_statuses.map((status,i)=>{
                   if(status.status === 'unoccupied') return (
                     <circle
                       key={status.cardreaderid}

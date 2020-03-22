@@ -80,9 +80,7 @@ class App extends React.Component {
       for(var i = 0; i < res.data.length; ++i){
         console.log(res.data[i].msgType + ': ' + res.data[i].msg);
       }
-      console.log(this.state);
       this.setState({ checkins: [] });
-      console.log(this.state);
     })
     .catch(err => console.error(err));
   }
