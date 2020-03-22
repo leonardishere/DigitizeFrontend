@@ -1,38 +1,51 @@
-.App {
-  text-align: center;
-}
+/* my stuff */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@media (min-width: 992px) {
+  .col-lg-mod-1 {
+    flex: 0 0 2%;
+    max-width: 2%;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .col-lg-mod-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .col-lg-mod-9 {
+    flex: 0 0 69%;
+    max-width: 69%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.container {
+  position: relative;
+  width: 100%;
+  padding: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  background-color: rgba(0,0,0,0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-item {
+  cursor: pointer;
+}
+
+.nav-link {
+  background: -webkit-linear-gradient(330deg, #ef5350, #e53935);
+  background: -o-linear-gradient(330deg, #ef5350, #e53935);
+  background: linear-gradient(60deg, #ef5350, #e53935);
+}
+
+#attendee_list {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
