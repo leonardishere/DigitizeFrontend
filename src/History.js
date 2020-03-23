@@ -13,12 +13,12 @@ function ActiveCheckinTable(props){
       </CardHeader>
       <CardBody>
         {
-          props.checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No active checkins</p> :
+          props.active_checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No active checkins</p> :
           <Table
             tableHeaderColor="primary"
             tableHead={['Name', 'Cardreader', 'Time']}
             tableData={
-              props.checkins.map(checkin=>{
+              props.active_checkins.map(checkin=>{
                 return [
                   checkin.Student.Name,
                   checkin.CardReaderID.toString(),
@@ -41,16 +41,16 @@ function InactiveCheckinTable(props){
       </CardHeader>
       <CardBody>
         {
-          props.checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No inactive checkins</p> :
+          props.inactive_checkins.length === 0 ? <p style={{paddingLeft:"8px",paddingTop:"12px"}}>No inactive checkins</p> :
           <Table
             tableHeaderColor="primary"
             tableHead={['Name', 'Time In', 'Time Out']}
             tableData={
-              props.checkins.map(checkin=>{
+              props.inactive_checkins.map(checkin=>{
                 return [
                   checkin.Student.Name,
-                  new Date(checkin.CheckinTime).toLocaleTimeString(),
-                  new Date(checkin.CheckoutTime).toLocaleTimeString()
+                  new Date(checkin.CheckinTime).toString(),
+                  new Date(checkin.CheckoutTime).toString()
                 ];
               })
             }
@@ -71,9 +71,9 @@ class History extends React.Component {
   render(){
     return (
       <div>
-        <ActiveCheckinTable checkins={this.props.checkins}/>
+        <ActiveCheckinTable active_checkins={this.props.active_checkins}/>
         <Spacer/>
-        <InactiveCheckinTable checkins={[]}/>
+        <InactiveCheckinTable inactive_checkins={this.props.inactive_checkins}/>
       </div>
     )
   }

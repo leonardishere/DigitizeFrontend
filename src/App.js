@@ -29,7 +29,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       selected: 'loading',
-      checkins: [],
+      active_checkins: [],
+      inactive_checkins: [],
       students: []
     };
     this.loadData = this.loadData.bind(this);
@@ -41,12 +42,21 @@ class App extends React.Component {
   }
 
   loadData(){
-    var get_checkins_url = "https://digitize-api1.aleonard.dev/checkins/active/";
-    axios.get(get_checkins_url)
+    var get_active_checkins_url = "https://digitize-api1.aleonard.dev/checkins/active/";
+    axios.get(get_active_checkins_url)
     .then(res => {
       this.setState({
         selected: 'dashboard',
-        checkins: res.data
+        active_checkins: res.data
+      });
+    })
+    .catch(err => console.error(err));
+
+    var get_inactive_checkins_url = "https://digitize-api1.aleonard.dev/checkins/inactive/";
+    axios.get(get_inactive_checkins_url)
+    .then(res => {
+      this.setState({
+        inactive_checkins: res.data
       });
     })
     .catch(err => console.error(err));
@@ -88,8 +98,8 @@ class App extends React.Component {
   render() {
     var element = null;
     if(this.state.selected === 'loading') element = <Loading/>;
-    else if(this.state.selected === 'dashboard') element = <Dashboard checkins={this.state.checkins}/>;
-    else if(this.state.selected === 'history') element = <History checkins={this.state.checkins}/>;
+    else if(this.state.selected === 'dashboard') element = <Dashboard checkins={this.state.active_checkins}/>;
+    else if(this.state.selected === 'history') element = <History active_checkins={this.state.active_checkins} inactive_checkins={this.state.inactive_checkins}/>;
     else if(this.state.selected === 'students') element = <Students students={this.state.students}/>;
 
     return (
