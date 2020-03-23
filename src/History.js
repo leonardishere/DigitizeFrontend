@@ -5,6 +5,8 @@ import CardHeader from './components/Card/CardHeader.jsx';
 import CardBody from './components/Card/CardBody.jsx';
 import Table from './components/Table/Table.jsx';
 
+var formatDate = (date) => date.toLocaleDateString() + " " + date.toLocaleTimeString()
+
 function ActiveCheckinTable(props){
   return (
     <Card className="col-12">
@@ -22,7 +24,7 @@ function ActiveCheckinTable(props){
                 return [
                   checkin.Student.Name,
                   checkin.CardReaderID.toString(),
-                  new Date(checkin.CheckinTime).toLocaleTimeString()
+                  formatDate(new Date(checkin.CheckinTime))
                 ];
               })
             }
@@ -49,8 +51,8 @@ function InactiveCheckinTable(props){
               props.inactive_checkins.map(checkin=>{
                 return [
                   checkin.Student.Name,
-                  new Date(checkin.CheckinTime).toString(),
-                  new Date(checkin.CheckoutTime).toString()
+                  formatDate(new Date(checkin.CheckinTime)),
+                  formatDate(new Date(checkin.CheckoutTime))
                 ];
               })
             }
