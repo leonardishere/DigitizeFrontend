@@ -1,9 +1,12 @@
 import React from 'react';
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import './MySidebar.css';
 
 class MySidebar extends React.Component {
   render() {
-    return (
-      <div className="sidebar" data-background-color="white">
+    var insides = (
+      <div className="my_sidebar">
         <div className="logo">
           {/*eslint-disable-next-line*/}
           <a className="simple-text logo-normal">Digitize</a>
@@ -47,6 +50,33 @@ class MySidebar extends React.Component {
             </li>
           </ul>
         </div>
+      </div>
+    );
+
+    return (
+      <div className="sidebar" data-background-color="white">
+        <Hidden mdUp implementation="css">
+          <Drawer
+            variant="temporary"
+            anchor={"left"}
+            open={this.props.mobileOpen}
+            onClose={this.props.handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            {insides}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            anchor={"left"}
+            variant="permanent"
+            open
+          >
+            {insides}
+          </Drawer>
+        </Hidden>
       </div>
     )
   }

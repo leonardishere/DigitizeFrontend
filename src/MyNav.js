@@ -11,7 +11,14 @@ class MyNav extends React.Component {
             </ul>
           </div>
 
-          <button className="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            aria-controls="navigation-index"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            onClick={this.props.handleDrawerToggle}>
             <span className="sr-only">Toggle navigation</span>
             <span className="navbar-toggler-icon icon-bar"></span>
             <span className="navbar-toggler-icon icon-bar"></span>

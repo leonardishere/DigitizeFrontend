@@ -31,13 +31,15 @@ class App extends React.Component {
       selected: 'loading',
       active_checkins: [],
       inactive_checkins: [],
-      students: []
+      students: [],
+      mobileOpen: false
     };
     this.loadData = this.loadData.bind(this);
     this.clickDashboard = this.clickDashboard.bind(this);
     this.clickHistory = this.clickHistory.bind(this);
     this.clickStudents = this.clickStudents.bind(this);
     this.dismissClass = this.dismissClass.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.loadData();
   }
 
@@ -72,15 +74,15 @@ class App extends React.Component {
   }
 
   clickDashboard(){
-    this.setState({selected: 'dashboard'});
+    this.setState({selected: 'dashboard', mobileOpen: false});
   }
 
   clickHistory(){
-    this.setState({selected: 'history'});
+    this.setState({selected: 'history', mobileOpen: false});
   }
 
   clickStudents(){
-    this.setState({selected: 'students'});
+    this.setState({selected: 'students', mobileOpen: false});
   }
 
   dismissClass(){
@@ -90,9 +92,13 @@ class App extends React.Component {
       for(var i = 0; i < res.data.length; ++i){
         console.log(res.data[i].msgType + ': ' + res.data[i].msg);
       }
-      this.setState({ checkins: [] });
+      this.setState({ checkins: [], mobileOpen: false });
     })
     .catch(err => console.error(err));
+  }
+
+  handleDrawerToggle(){
+    this.setState({ mobileOpen: !this.state.mobileOpen });
   }
 
   render() {
@@ -110,9 +116,11 @@ class App extends React.Component {
             clickHistory={this.clickHistory}
             clickStudents={this.clickStudents}
             dismissClass={this.dismissClass}
+            handleDrawerToggle={this.handleDrawerToggle}
+            mobileOpen={this.state.mobileOpen}
           />
           <div className="main-panel">
-            <MyNav/>
+            <MyNav handleDrawerToggle={this.handleDrawerToggle}/>
             <div className="content">
               {element}
             <Footer/>

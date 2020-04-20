@@ -1,6 +1,6 @@
 /* my stuff */
 
-@media (min-width: 992px) {
+@media (min-width: 991px) {
   .col-lg-mod-1 {
     flex: 0 0 2%;
     max-width: 2%;
