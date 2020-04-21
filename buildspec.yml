@@ -14,6 +14,14 @@ phases:
     commands:
       # Discover and run unit tests in the 'tests' directory
       - npm run test
+      # what are these vars
+      - echo $WEBSITE_S3_BUCKET
+      - echo $WEBSITE_S3_PREFIX
+      - echo $S3_BUCKET
+      - echo $PARTITION
+      - echo $AWS_REGION
+      - echo $ACCOUNT_ID
+      - echo $PROJECT_ID
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
