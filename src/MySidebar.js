@@ -1,6 +1,7 @@
 import React from 'react';
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
+
 import './MySidebar.css';
 
 class MySidebar extends React.Component {
@@ -41,7 +42,7 @@ class MySidebar extends React.Component {
                 <p>Dismiss Class</p>
               </a>
             </li>
-            <li id="dismiss_class_btn" className="nav-item active" onClick={()=>console.log('clicked checkin')}>
+            <li id="dismiss_class_btn" className="nav-item active" onClick={()=>this.props.showNotification('Student checked in')}>
               {/*eslint-disable-next-line*/}
               <a className="nav-link">
                 <i className="material-icons">exit_to_app</i>

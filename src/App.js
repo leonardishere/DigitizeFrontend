@@ -2,6 +2,11 @@ import React from 'react';
 import './material-dashboard.min.css';
 import './App.css';
 
+// @material-ui/icons
+import AddAlert from "@material-ui/icons/AddAlert";
+//core components
+import Snackbar from "./components/Snackbar/Snackbar.jsx";
+
 import MySidebar from './MySidebar.js';
 import MyNav from './MyNav.js';
 import Dashboard from './Dashboard.js';
@@ -32,13 +37,17 @@ class App extends React.Component {
       active_checkins: [],
       inactive_checkins: [],
       students: [],
-      mobileOpen: false
+      mobileOpen: false,
+      notificationOpen: false,
+      notificationType: 'info',
+      notificationText: ''
     };
     this.loadData = this.loadData.bind(this);
     this.clickDashboard = this.clickDashboard.bind(this);
     this.clickHistory = this.clickHistory.bind(this);
     this.clickStudents = this.clickStudents.bind(this);
     this.dismissClass = this.dismissClass.bind(this);
+    this.showNotification = this.showNotification.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.loadData();
   }
@@ -97,6 +106,17 @@ class App extends React.Component {
     .catch(err => console.error(err));
   }
 
+  showNotification(text){
+    this.setState({
+      notificationOpen: true,
+      //notificationType: type,
+      notificationText: text
+    });
+    setTimeout(function(){
+        this.setState({notificationOpen: false});
+    }.bind(this),4000);
+  }
+
   handleDrawerToggle(){
     this.setState({ mobileOpen: !this.state.mobileOpen });
   }
@@ -116,6 +136,7 @@ class App extends React.Component {
             clickHistory={this.clickHistory}
             clickStudents={this.clickStudents}
             dismissClass={this.dismissClass}
+            showNotification={this.showNotification}
             handleDrawerToggle={this.handleDrawerToggle}
             mobileOpen={this.state.mobileOpen}
           />
@@ -127,6 +148,15 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <Snackbar
+            place='tr'
+            color={this.state.notificationType}
+            icon={AddAlert}
+            message={this.state.notificationText}
+            open={this.state.notificationOpen}
+            closeNotification={() => this.setState({notificationOpen:false})}
+            close
+        />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
       </div>
