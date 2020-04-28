@@ -116,7 +116,7 @@ class App extends React.Component {
 
   setupWebsocketClient(){
     window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var connection = new WebSocket('ws://digitize-api2.aleonard.dev/');
+    var connection = new WebSocket('wss://digitize-api2.aleonard.dev/');
     connection.onopen = () => {}
     connection.onerror = (error) => {
       console.log('error');
