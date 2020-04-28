@@ -15,19 +15,9 @@ import Students from './Students.js';
 
 const axios = require('axios');
 
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="container-fluid"></div>
-    </footer>
-  )
-}
+const Footer = () => <footer className="footer"><div className="container-fluid"></div></footer>
 
-function Loading() {
-  return (
-    <center><h1>Loading...</h1></center>
-  )
-}
+const Loading = () => <center><h1>Loading...</h1></center>
 
 class App extends React.Component {
   constructor(props){
@@ -50,6 +40,8 @@ class App extends React.Component {
     this.showNotification = this.showNotification.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.loadData();
+    this.setupWebsocketClient = this.setupWebsocketClient.bind(this);
+    this.setupWebsocketClient();
   }
 
   loadData(){
@@ -106,11 +98,12 @@ class App extends React.Component {
     .catch(err => console.error(err));
   }
 
-  showNotification(text){
+  showNotification(msgType, msg){
+    if(!(["info","success","warning","danger","primary"].includes(msgType))) msgType='info'
     this.setState({
       notificationOpen: true,
-      //notificationType: type,
-      notificationText: text
+      notificationType: msgType,
+      notificationText: msg
     });
     setTimeout(function(){
         this.setState({notificationOpen: false});
@@ -119,6 +112,28 @@ class App extends React.Component {
 
   handleDrawerToggle(){
     this.setState({ mobileOpen: !this.state.mobileOpen });
+  }
+
+  setupWebsocketClient(){
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
+    var connection = new WebSocket('ws://digitize-api2.aleonard.dev/');
+    connection.onopen = () => {}
+    connection.onerror = (error) => {
+      console.log('error');
+      console.log(error)
+    };
+    connection.onmessage = (message) => {
+      try {
+        var json = JSON.parse(message.data);
+      } catch (e) {
+        console.log('Invalid JSON: ', message.data);
+        return;
+      }
+      this.showNotification(json.msgType, json.msg);
+    }
+    connection.onclose = () => {
+      this.setupWebsocketClient();
+    }
   }
 
   render() {
