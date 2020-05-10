@@ -12,6 +12,7 @@ import MyNav from './MyNav.js';
 import Dashboard from './Dashboard.js';
 import History from './History.js';
 import Students from './Students.js';
+import WebSocketManager from './WebSocketManager.js';
 
 const axios = require('axios');
 
@@ -40,8 +41,7 @@ class App extends React.Component {
     this.showNotification = this.showNotification.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.loadData();
-    this.setupWebsocketClient = this.setupWebsocketClient.bind(this);
-    this.setupWebsocketClient();
+    this.websocketmanager = new WebSocketManager(this);
   }
 
   loadData(){
@@ -112,28 +112,6 @@ class App extends React.Component {
 
   handleDrawerToggle(){
     this.setState({ mobileOpen: !this.state.mobileOpen });
-  }
-
-  setupWebsocketClient(){
-    window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var connection = new WebSocket('wss://digitize-api2.aleonard.dev/');
-    connection.onopen = () => {}
-    connection.onerror = (error) => {
-      console.log('error');
-      console.log(error)
-    };
-    connection.onmessage = (message) => {
-      try {
-        var json = JSON.parse(message.data);
-      } catch (e) {
-        console.log('Invalid JSON: ', message.data);
-        return;
-      }
-      this.showNotification(json.msgType, json.msg);
-    }
-    connection.onclose = () => {
-      this.setupWebsocketClient();
-    }
   }
 
   render() {
