@@ -18,6 +18,7 @@ class ClassroomMap extends React.Component {
       });
     }
     for(i = 0; i < this.props.checkins.length; ++i){
+      if(this.props.checkins[i].CardReaderID < 0 || this.props.checkins[i].CardReaderID >= 52) continue;
       cardreader_statuses[this.props.checkins[i].CardReaderID] = {
         cardreaderid: this.props.checkins[i].CardReaderID,
         status: this.props.selected === this.props.checkins[i].CardReaderID ? 'selected' : 'occupied',

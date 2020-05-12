@@ -21,7 +21,7 @@ class AttendeeList extends React.Component {
                     className="list-group-item"
                     onMouseEnter={e=>this.props.handleHover(checkin.CardReaderID,true)}
                     onMouseLeave={e=>this.props.handleHover(checkin.CardReaderID,false)}
-                    style={this.props.selected === checkin.CardReaderID ? {backgroundColor:'lightgray'} : {}}
+                    style={checkin.CardReaderID > 0 && this.props.selected === checkin.CardReaderID ? {backgroundColor:'lightgray'} : {}}
                   >
                     {checkin.Student.Name}
                   </li>

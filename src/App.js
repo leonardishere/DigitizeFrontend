@@ -90,9 +90,6 @@ class App extends React.Component {
     var dismiss_class_url = "https://digitize-api1.aleonard.dev/checkout/";
     axios.post(dismiss_class_url)
     .then(res => {
-      for(var i = 0; i < res.data.length; ++i){
-        console.log(res.data[i].msgType + ': ' + res.data[i].msg);
-      }
       this.setState({ checkins: [], mobileOpen: false });
     })
     .catch(err => console.error(err));
