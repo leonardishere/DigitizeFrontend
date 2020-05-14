@@ -31,7 +31,7 @@ class MySidebar extends React.Component {
             <li className="nav-item active" onClick={this.props.clickStudents}>
               {/*eslint-disable-next-line*/}
               <a className="nav-link">
-                <i className="material-icons">calendar_today</i>
+                <i className="material-icons">face</i>
                 <p>Students</p>
               </a>
             </li>
@@ -42,7 +42,7 @@ class MySidebar extends React.Component {
                 <p>Dismiss Class</p>
               </a>
             </li>
-            <li id="dismiss_class_btn" className="nav-item active" onClick={()=>this.props.showNotification('Student checked in')}>
+            <li id="dismiss_class_btn" className="nav-item active" onClick={this.props.checkin}>
               {/*eslint-disable-next-line*/}
               <a className="nav-link">
                 <i className="material-icons">exit_to_app</i>

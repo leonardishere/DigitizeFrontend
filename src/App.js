@@ -38,6 +38,7 @@ class App extends React.Component {
     this.clickHistory = this.clickHistory.bind(this);
     this.clickStudents = this.clickStudents.bind(this);
     this.dismissClass = this.dismissClass.bind(this);
+    this.checkin = this.checkin.bind(this);
     this.showNotification = this.showNotification.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.loadData();
@@ -60,15 +61,6 @@ class App extends React.Component {
     .then(res => {
       this.setState({
         inactive_checkins: res.data
-      });
-    })
-    .catch(err => console.error(err));
-
-    var get_students_url = "https://digitize-api1.aleonard.dev/students/";
-    axios.get(get_students_url)
-    .then(res => {
-      this.setState({
-        students: res.data
       });
     })
     .catch(err => console.error(err));
@@ -95,7 +87,12 @@ class App extends React.Component {
     .catch(err => console.error(err));
   }
 
+  checkin(){
+    this.websocketmanager.click_checkin();
+  }
+
   showNotification(msgType, msg){
+    if(msgType === 'ignore') return;
     if(!(["info","success","warning","danger","primary"].includes(msgType))) msgType='info'
     this.setState({
       notificationOpen: true,
@@ -126,6 +123,7 @@ class App extends React.Component {
             clickHistory={this.clickHistory}
             clickStudents={this.clickStudents}
             dismissClass={this.dismissClass}
+            checkin={this.checkin}
             showNotification={this.showNotification}
             handleDrawerToggle={this.handleDrawerToggle}
             mobileOpen={this.state.mobileOpen}

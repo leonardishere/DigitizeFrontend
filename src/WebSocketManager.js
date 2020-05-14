@@ -1,6 +1,7 @@
 class WebSocketManager{
   constructor(app){
     this.app = app;
+    this.loadData = this.loadData.bind(this);
     this.onmessage = this.onmessage.bind(this);
     this.handle_data = this.handle_data.bind(this);
     this.add_students = this.add_students.bind(this);
@@ -8,19 +9,29 @@ class WebSocketManager{
     this.checkin = this.checkin.bind(this);
     this.checkout = this.checkout.bind(this);
     this.checkout_all = this.checkout_all.bind(this);
-    this.openSocket();
+    this.click_checkin = this.click_checkin.bind(this);
+    this.get_students = this.get_students.bind(this);
+    this.openSocket(true);
   }
 
-  openSocket(){
+  openSocket(init){
     window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var connection = new WebSocket('wss://digitize-api2.aleonard.dev/');
-    connection.onopen = () => {}
-    connection.onerror = (error) => {}
-    connection.onmessage = this.onmessage;
-    connection.onclose = () => { this.openSocket(); }
+    this.connection = new WebSocket('wss://digitize-api2.aleonard.dev/');
+    if(init) this.connection.onopen = () => {this.loadData()}
+    else this.connection.onopen = () => {}
+    this.connection.onerror = (error) => {}
+    this.connection.onmessage = this.onmessage;
+    this.connection.onclose = () => { this.openSocket(false); }
+  }
+
+  loadData(){
+    this.connection.send(JSON.stringify({"message":"getstudents"}));
   }
 
   onmessage(message){
+    console.log('received:');
+    console.log(message);
+    console.log(JSON.parse(message['data']));
     try {
       var json = JSON.parse(message.data);
     } catch (e) {
@@ -30,6 +41,7 @@ class WebSocketManager{
     for(var i = 0; i < json.length; ++i){
       var row = json[i];
       this.app.showNotification(row.msgType, row.msg);
+      console.log(row);
       if(row.hasOwnProperty('data')){
         this.handle_data(row['data']);
       }
@@ -52,6 +64,9 @@ class WebSocketManager{
     if(data.hasOwnProperty('checkout_all')){
       this.checkout_all(data['checkout_all']);
     }
+    if(data.hasOwnProperty('students')){
+      this.get_students(data['students']);
+    }
   }
 
   add_students(students){
@@ -62,6 +77,8 @@ class WebSocketManager{
     new_students.sort((student1,student2)=>{
       if(student1['Name'] > student2['Name']) return 1;
       if(student1['Name'] < student2['Name']) return -1;
+      if(student1['StudentID'] > student2['StudentID']) return 1;
+      if(student1['StudentID'] < student2['StudentID']) return -11;
       return 0;
     });
     this.app.setState({'students': new_students});
@@ -130,6 +147,21 @@ class WebSocketManager{
       'active_checkins': [],
       'inactive_checkins': inactive_checkins
     });
+  }
+
+  click_checkin(){
+    console.log('clicked checkin but not doing anything');
+  }
+
+  get_students(students){
+    students.sort((student1,student2)=>{
+      if(student1['Name'] > student2['Name']) return 1;
+      if(student1['Name'] < student2['Name']) return -1;
+      if(student1['StudentID'] > student2['StudentID']) return 1;
+      if(student1['StudentID'] < student2['StudentID']) return -11;
+      return 0;
+    });
+    this.app.setState({'students': students});
   }
 }
 
