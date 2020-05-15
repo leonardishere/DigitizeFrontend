@@ -16,7 +16,7 @@ This repository holds the frontend of the site.
 - AWS S3
 - AWS CodePipeline
 - AWS CloudFormation
-- WebSockets (coming soon)
+- WebSockets
 
 #### Todo list:
 - [ ] Add more explanation to the README
@@ -24,12 +24,12 @@ This repository holds the frontend of the site.
 - [x] Migrate from EC2 LAMP instance to S3, CloudFront
 - [x] Migrate from JQuery to React.js, Node.js
 - [x] Squash bug: sidebar doesn't open on mobile
-- [ ] Connect to API
+- [x] Connect to API
   - [x] Students
   - [x] Active checkins
   - [x] Inactive checkins
   - [x] Dismiss class
-  - [ ] WebSockets
+  - [x] WebSockets
 - [ ] Use more React-like components, object hierarchy
 - [ ] Use hooks
 - [ ] Test
@@ -39,3 +39,4 @@ This repository holds the frontend of the site.
 - More detailed attendance analysis
 - Automated attendance grading
 - Connect to SCU Students database
+- Staff login
