@@ -10,6 +10,7 @@ class WebSocketManager{
     this.checkout = this.checkout.bind(this);
     this.checkout_all = this.checkout_all.bind(this);
     this.click_checkin = this.click_checkin.bind(this);
+    this.click_checkout = this.click_checkout.bind(this);
     this.get_students = this.get_students.bind(this);
     this.get_active_checkins = this.get_active_checkins.bind(this);
     this.get_inactive_checkins = this.get_inactive_checkins.bind(this);
@@ -157,7 +158,10 @@ class WebSocketManager{
 
   click_checkin(){
     console.log('clicked checkin but not doing anything');
+  }
 
+  click_checkout(){
+    this.connection.send(JSON.stringify({"message":"checkout"}));
   }
 
   get_students(students){

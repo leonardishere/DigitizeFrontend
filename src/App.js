@@ -14,8 +14,6 @@ import History from './History.js';
 import Students from './Students.js';
 import WebSocketManager from './WebSocketManager.js';
 
-const axios = require('axios');
-
 const Footer = () => <footer className="footer"><div className="container-fluid"></div></footer>
 
 const Loading = () => <center><h1>Loading...</h1></center>
@@ -56,12 +54,7 @@ class App extends React.Component {
   }
 
   dismissClass(){
-    var dismiss_class_url = "https://digitize-api1.aleonard.dev/checkout/";
-    axios.post(dismiss_class_url)
-    .then(res => {
-      this.setState({ checkins: [], mobileOpen: false });
-    })
-    .catch(err => console.error(err));
+    this.websocketmanager.click_checkout();
   }
 
   checkin(){
