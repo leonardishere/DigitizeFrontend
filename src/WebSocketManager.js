@@ -11,6 +11,8 @@ class WebSocketManager{
     this.checkout_all = this.checkout_all.bind(this);
     this.click_checkin = this.click_checkin.bind(this);
     this.get_students = this.get_students.bind(this);
+    this.get_active_checkins = this.get_active_checkins.bind(this);
+    this.get_inactive_checkins = this.get_inactive_checkins.bind(this);
     this.openSocket(true);
   }
 
@@ -26,12 +28,11 @@ class WebSocketManager{
 
   loadData(){
     this.connection.send(JSON.stringify({"message":"getstudents"}));
+    this.connection.send(JSON.stringify({"message":"getactivecheckins"}));
+    this.connection.send(JSON.stringify({"message":"getinactivecheckins"}));
   }
 
   onmessage(message){
-    console.log('received:');
-    console.log(message);
-    console.log(JSON.parse(message['data']));
     try {
       var json = JSON.parse(message.data);
     } catch (e) {
@@ -41,7 +42,6 @@ class WebSocketManager{
     for(var i = 0; i < json.length; ++i){
       var row = json[i];
       this.app.showNotification(row.msgType, row.msg);
-      console.log(row);
       if(row.hasOwnProperty('data')){
         this.handle_data(row['data']);
       }
@@ -66,6 +66,12 @@ class WebSocketManager{
     }
     if(data.hasOwnProperty('students')){
       this.get_students(data['students']);
+    }
+    if(data.hasOwnProperty('active_checkins')){
+      this.get_active_checkins(data['active_checkins']);
+    }
+    if(data.hasOwnProperty('inactive_checkins')){
+      this.get_inactive_checkins(data['inactive_checkins']);
     }
   }
 
@@ -151,6 +157,7 @@ class WebSocketManager{
 
   click_checkin(){
     console.log('clicked checkin but not doing anything');
+
   }
 
   get_students(students){
@@ -162,6 +169,22 @@ class WebSocketManager{
       return 0;
     });
     this.app.setState({'students': students});
+  }
+
+  get_active_checkins(active_checkins){
+    active_checkins.sort((checkin1, checkin2) => {
+      if(checkin1['CardReaderID'] > checkin2['CardReaderID']) return 1;
+      if(checkin1['CardReaderID'] < checkin2['CardReaderID']) return -1;
+      return 0;
+    });
+    this.app.setState({
+      'active_checkins': active_checkins,
+      'selected': 'dashboard'
+    });
+  }
+
+  get_inactive_checkins(inactive_checkins){
+    this.app.setState({'inactive_checkins': inactive_checkins});
   }
 }
 

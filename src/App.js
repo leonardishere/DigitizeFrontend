@@ -33,7 +33,6 @@ class App extends React.Component {
       notificationType: 'info',
       notificationText: ''
     };
-    this.loadData = this.loadData.bind(this);
     this.clickDashboard = this.clickDashboard.bind(this);
     this.clickHistory = this.clickHistory.bind(this);
     this.clickStudents = this.clickStudents.bind(this);
@@ -41,29 +40,7 @@ class App extends React.Component {
     this.checkin = this.checkin.bind(this);
     this.showNotification = this.showNotification.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
-    this.loadData();
     this.websocketmanager = new WebSocketManager(this);
-  }
-
-  loadData(){
-    var get_active_checkins_url = "https://digitize-api1.aleonard.dev/checkins/active/";
-    axios.get(get_active_checkins_url)
-    .then(res => {
-      this.setState({
-        selected: 'dashboard',
-        active_checkins: res.data
-      });
-    })
-    .catch(err => console.error(err));
-
-    var get_inactive_checkins_url = "https://digitize-api1.aleonard.dev/checkins/inactive/";
-    axios.get(get_inactive_checkins_url)
-    .then(res => {
-      this.setState({
-        inactive_checkins: res.data
-      });
-    })
-    .catch(err => console.error(err));
   }
 
   clickDashboard(){
