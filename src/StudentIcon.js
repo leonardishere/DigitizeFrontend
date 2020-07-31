@@ -53,38 +53,44 @@ function stringHash(str, mod) {
 }
 
 const StudentIcon = (props) => {
-  if(props.status.status === 'unoccupied') {
-    return (
-      <circle
+  return props.status.status === 'unoccupied'
+  ? <EmptyIcon {...props}/>
+  : <FullIcon {...props}/>
+}
+
+const EmptyIcon = (props) => {
+  return (
+    <circle
+      key={props.status.cardreaderid}
+      cx={chair_coords[props.status.cardreaderid][0]}
+      cy={chair_coords[props.status.cardreaderid][1]}
+      r="7" stroke="black" strokeWidth="1" fill="white"
+    />
+  )
+}
+
+const FullIcon = (props) => {
+  var icon = icons[stringHash(props.status.cardid, icons.length)]
+  var iconr = 12
+  var tx = chair_coords[props.status.cardreaderid][0]-iconr
+  var ty = chair_coords[props.status.cardreaderid][1]-iconr
+  var sx = 2*iconr/icon.viewBoxSize[0]
+  var sy = 2*iconr/icon.viewBoxSize[1]
+  var transform = "translate("+tx+" "+ty+") scale("+sx+" "+sy+")";
+  return (
+    <g
+      onMouseEnter={e=>props.handleHover(props.status.cardreaderid,true)}
+      onMouseLeave={e=>props.handleHover(props.status.cardreaderid,false)}>
+      <ellipse
         key={props.status.cardreaderid}
         cx={chair_coords[props.status.cardreaderid][0]}
         cy={chair_coords[props.status.cardreaderid][1]}
-        r="7" stroke="black" strokeWidth="1" fill="white"
+        rx={icon.rx*iconr} ry={icon.ry*iconr}
+        fill={ props.status.status === 'occupied' ? 'yellow' : 'green' }
       />
-    )
-  } else {
-    var icon = icons[stringHash(props.status.cardid, icons.length)]
-    var iconr = 12
-    var tx = chair_coords[props.status.cardreaderid][0]-iconr
-    var ty = chair_coords[props.status.cardreaderid][1]-iconr
-    var sx = 2*iconr/icon.viewBoxSize[0]
-    var sy = 2*iconr/icon.viewBoxSize[1]
-    var transform = "translate("+tx+" "+ty+") scale("+sx+" "+sy+")";
-    return (
-      <g
-        onMouseEnter={e=>props.handleHover(props.status.cardreaderid,true)}
-        onMouseLeave={e=>props.handleHover(props.status.cardreaderid,false)}>
-        <ellipse
-          key={props.status.cardreaderid}
-          cx={chair_coords[props.status.cardreaderid][0]}
-          cy={chair_coords[props.status.cardreaderid][1]}
-          rx={icon.rx*iconr} ry={icon.ry*iconr}
-          fill={ props.status.status === 'occupied' ? 'yellow' : 'green' }
-        />
-        <path transform={transform} d={icon.d}></path>
-      </g>
-    )
-  }
+      <path transform={transform} d={icon.d}></path>
+    </g>
+  )
 }
 
 export default StudentIcon
