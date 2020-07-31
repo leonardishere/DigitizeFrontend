@@ -11,7 +11,7 @@ function ActiveCheckinTable(props){
   return (
     <Card className="col-12">
       <CardHeader color="danger">
-        <p style={{marginBottom:'0px'}}>Active Checkins</p>
+        <p className="card_title_text">Active Checkins</p>
       </CardHeader>
       <CardBody>
         {

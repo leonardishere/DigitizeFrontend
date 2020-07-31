@@ -9,7 +9,7 @@ class AttendeeList extends React.Component {
     return (
       <Card className="col-lg-mod-3 col-md-12 col-sm-12">
         <CardHeader color="danger">
-          <p style={{marginBottom:'0px'}}>Attendees</p>
+          <p className="card_title_text">Attendees</p>
         </CardHeader>
         <CardBody>
           <ul id="attendee_list" className="list-group list-group-flush">

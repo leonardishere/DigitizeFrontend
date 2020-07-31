@@ -1,0 +1,12 @@
+.classroom_map .background_img {
+  width: 100%;
+  visibility: hidden;
+}
+
+.classroom_map svg path{
+   fill: #a36e39;
+   stroke: black;
+   stroke-width: 1;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+}

@@ -10,7 +10,7 @@ class Students extends React.Component {
     return (
       <Card className="col-12">
         <CardHeader color="danger">
-          <p style={{marginBottom:'0px'}}>Students</p>
+          <p className="card_title_text">Students</p>
         </CardHeader>
         <CardBody>
           {
