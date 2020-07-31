@@ -3,8 +3,16 @@
   visibility: hidden;
 }
 
-.classroom_map svg path{
+.classroom_map svg .desks path{
    fill: #a36e39;
+   stroke: black;
+   stroke-width: 1;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+}
+
+.classroom_map svg .chairs path{
+   fill: black;
    stroke: black;
    stroke-width: 1;
    stroke-linecap: round;
