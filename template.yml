@@ -28,6 +28,10 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: digitize.aleonard.dev
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
       WebsiteConfiguration:
         IndexDocument: index.html
       Tags:
