@@ -1,6 +1,6 @@
 # Digitize
 
-This project began as the SCU COEN 315 - Web Architecture and Protocols final project. Not surprisingly, it was abandoned the day after it was submitted for a grade. It has since turned into an exercise in converting a serverful web app into its serverless equivalent.
+This project began as the SCU COEN 315 - Web Architecture and Protocols final project. Not surprisingly, it was abandoned the day after it was submitted for a grade. It has since turned into an exercise in converting a serverful web app into its serverless equivalent using AWS managed services.
 
 This repository holds the frontend of the site.
 
@@ -23,7 +23,6 @@ This repository holds the frontend of the site.
 - [x] Create CI/CD Pipeline
 - [x] Migrate from EC2 LAMP instance to S3, CloudFront
 - [x] Migrate from JQuery to React.js, Node.js
-- [x] Squash bug: sidebar doesn't open on mobile
 - [x] Connect to API
   - [x] Students
   - [x] Active checkins
@@ -33,6 +32,7 @@ This repository holds the frontend of the site.
 - [ ] Use more React-like components, object hierarchy
 - [ ] Use hooks
 - [ ] Test
+- [ ] Create documentation, architecture diagrams
 
 #### Future work:
 - More than one classroom/school
