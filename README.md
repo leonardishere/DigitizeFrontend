@@ -21,6 +21,7 @@ This repository holds the frontend of the site.
 ### Architecture
 Below is a high-level architecture diagram for Digitize.
 This repository includes the CloudFront CDN, S3 site storage bucket, the site code, and the Route 53 DNS entries to access the site. Infrastructure and code are continuously integrated and deployed with CodeStar.
+
 ![Architecture](images/Digitize_Architecture.svg)
 
 ### Todo list:
