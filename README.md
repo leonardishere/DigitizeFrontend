@@ -4,11 +4,11 @@ This project began as the SCU COEN 315 - Web Architecture and Protocols final pr
 
 This repository holds the frontend of the site.
 
-#### External links:
+### External links:
 - [Website](https://digitize.aleonard.dev)
 - [Backend repository](https://github.com/leonardishere/DigitizeBackend)
 
-#### Technologies used:
+### Technologies used:
 - React.js
 - Node.js
 - Bootstrap
@@ -18,8 +18,12 @@ This repository holds the frontend of the site.
 - AWS CloudFormation
 - WebSockets
 
-#### Todo list:
-- [ ] Add more explanation to the README
+### Architecture
+Below is a high-level architecture diagram for Digitize.
+This repository includes the CloudFront CDN, S3 site storage bucket, the site code, and the Route 53 DNS entries to access the site. Infrastructure and code are continuously integrated and deployed with CodeStar.
+![Architecture](images/Digitize_Architecture.svg)
+
+### Todo list:
 - [x] Create CI/CD Pipeline
 - [x] Migrate from EC2 LAMP instance to S3, CloudFront
 - [x] Migrate from JQuery to React.js, Node.js
@@ -29,12 +33,12 @@ This repository holds the frontend of the site.
   - [x] Inactive checkins
   - [x] Dismiss class
   - [x] WebSockets
+- [x] Add architecture diagram to the README
 - [ ] Use more React-like components, object hierarchy
 - [ ] Use hooks
 - [ ] Test
-- [ ] Create documentation, architecture diagrams
 
-#### Future work:
+### Future work:
 - More than one classroom/school
 - More detailed attendance analysis
 - Automated attendance grading
