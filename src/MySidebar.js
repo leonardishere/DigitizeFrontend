@@ -42,13 +42,6 @@ class MySidebar extends React.Component {
                 <p>Dismiss Class</p>
               </a>
             </li>
-            <li id="dismiss_class_btn" className="nav-item active" onClick={this.props.checkin}>
-              {/*eslint-disable-next-line*/}
-              <a className="nav-link">
-                <i className="material-icons">exit_to_app</i>
-                <p>Checkin</p>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
