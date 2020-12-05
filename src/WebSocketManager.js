@@ -183,7 +183,7 @@ class WebSocketManager{
     });
     this.app.setState({
       'active_checkins': active_checkins,
-      'selected': 'dashboard'
+      'selected': 'Dashboard'
     });
   }
 

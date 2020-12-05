@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      selected: 'loading',
+      selected: 'Loading',
       active_checkins: [],
       inactive_checkins: [],
       students: [],
@@ -42,15 +42,15 @@ class App extends React.Component {
   }
 
   clickDashboard(){
-    this.setState({selected: 'dashboard', mobileOpen: false});
+    this.setState({selected: 'Dashboard', mobileOpen: false});
   }
 
   clickHistory(){
-    this.setState({selected: 'history', mobileOpen: false});
+    this.setState({selected: 'History', mobileOpen: false});
   }
 
   clickStudents(){
-    this.setState({selected: 'students', mobileOpen: false});
+    this.setState({selected: 'Students', mobileOpen: false});
   }
 
   dismissClass(){
@@ -80,10 +80,10 @@ class App extends React.Component {
 
   render() {
     var element = null;
-    if(this.state.selected === 'loading') element = <Loading/>;
-    else if(this.state.selected === 'dashboard') element = <Dashboard checkins={this.state.active_checkins}/>;
-    else if(this.state.selected === 'history') element = <History active_checkins={this.state.active_checkins} inactive_checkins={this.state.inactive_checkins}/>;
-    else if(this.state.selected === 'students') element = <Students students={this.state.students}/>;
+    if(this.state.selected === 'Loading') element = <Loading/>;
+    else if(this.state.selected === 'Dashboard') element = <Dashboard checkins={this.state.active_checkins}/>;
+    else if(this.state.selected === 'History') element = <History active_checkins={this.state.active_checkins} inactive_checkins={this.state.inactive_checkins}/>;
+    else if(this.state.selected === 'Students') element = <Students students={this.state.students}/>;
 
     return (
       <div>
@@ -99,7 +99,7 @@ class App extends React.Component {
             mobileOpen={this.state.mobileOpen}
           />
           <div className="main-panel">
-            <MyNav handleDrawerToggle={this.handleDrawerToggle}/>
+            <MyNav handleDrawerToggle={this.handleDrawerToggle} selected={this.state.selected}/>
             <div className="content">
               {element}
             <Footer/>
