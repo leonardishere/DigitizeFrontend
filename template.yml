@@ -76,7 +76,7 @@ Resources:
           TargetOriginId: S3WebsiteBucket
           ForwardedValues:
             QueryString: false
-          MaxTTL: 60 # TODO: remove this after development is done
+          CachePolicyId: "658327ea-f89d-4fab-a63d-7e88639e58f6"
         PriceClass: PriceClass_100
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:917159232232:certificate/408296a8-d7c1-494a-b9ff-abe529616322

@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "react-scripts build && aws s3 rm s3://digitize.aleonard.dev --include \"*\" --recursive && aws s3 cp --recursive build/ s3://digitize.aleonard.dev/",
+    "deploy": "react-scripts build && aws s3 rm s3://digitize.aleonard.dev --include \"*\" --recursive && aws s3 cp --recursive --cache-control=\"max-age=86400\" build/ s3://digitize.aleonard.dev/",
     "test": "CI=true react-scripts test",
     "eject": "react-scripts eject"
   },
