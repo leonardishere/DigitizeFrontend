@@ -22,7 +22,7 @@ phases:
       - npm run build
       # Use AWS CLI to copy the application to the bucket
       - aws s3 rm s3://digitize.aleonard.dev --include "*" --recursive
-      - aws s3 cp --recursive build/ --cache-control="max-age=86400" s3://digitize.aleonard.dev/
+      - aws s3 cp --recursive --cache-control="max-age=86400" build/ s3://digitize.aleonard.dev/
   post_build:
     commands:
 
